@@ -1,13 +1,33 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/nledez/another-qovery-app/models" // new
+
+	controllers "github.com/nledez/another-qovery-app/controllers" // new
+
+	"github.com/gin-gonic/gin"
+)
 
 func main() {
 	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
+
+	db := models.SetupModels() // new
+
+	// Provide db variable to controllers
+	r.Use(func(c *gin.Context) {
+		c.Set("db", db)
+		c.Next()
 	})
-	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+
+	r.GET("/books", controllers.FindBooks)
+
+	r.POST("/books", controllers.CreateBook) // create
+
+	r.GET("/books/:id", controllers.FindBook) // find by id
+
+	r.PATCH("/books/:id", controllers.UpdateBook) // update by id
+
+	r.DELETE("/books/:id", controllers.DeleteBook) // delete by id
+
+	r.Run()
 }
