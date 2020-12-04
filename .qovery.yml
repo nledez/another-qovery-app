@@ -8,6 +8,9 @@ databases:
   name: my-db
 routers:
 - name: main
+  custom_domains:
+  - branch: master
+    domain: test-qovery.ledez.net
   routes:
   - application_name: another-qovery-app
     paths:
