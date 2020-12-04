@@ -9,7 +9,7 @@ databases:
 routers:
 - name: main
   custom_domains:
-  - branch: master
+  - branch: main
     domain: test-qovery.ledez.net
   routes:
   - application_name: another-qovery-app
