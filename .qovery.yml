@@ -10,7 +10,7 @@ routers:
 - name: main
   custom_domains:
   - branch: main
-    domain: test-qovery.ledez.net
+    domain: qovery-test1.ledez.net
   routes:
   - application_name: another-qovery-app
     paths:
